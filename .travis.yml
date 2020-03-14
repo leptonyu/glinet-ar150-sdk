@@ -1,0 +1,34 @@
+dist: bionic
+cache:
+  bundler: true
+  directories:
+  - cache/
+notifications:
+  email: false
+language: c
+compiler: gcc
+before_install:
+- sudo apt install asciidoc bash bc binutils bzip2 fastjar flex gawk gcc genisoimage
+  gettext git intltool jikespg libgtk2.0-dev libncurses5-dev libssl1.0-dev make mercurial
+  patch perl-modules python2.7-dev rsync ruby sdcc subversion unzip util-linux wget
+  xsltproc zlib1g-dev zlib1g-dev -y
+addons:
+  apt:
+    update: true
+install:
+- "./download.sh ar71xx-1806"
+script:
+- ./builder.sh -t ar71xx-1806 -d sdk/1806/ar71xx/feeds/base/package/libs/readline
+- ./builder.sh -t ar71xx-1806 -d sdk/1806/ar71xx/feeds/base/package/libs/ncurses
+- ./builder.sh -t ar71xx-1806 -d sdk/1806/ar71xx/feeds/base/package/libs/lzo
+- ./builder.sh -t ar71xx-1806 -d sdk/1806/ar71xx/feeds/base/package/libs/openssl
+- ./builder.sh -t ar71xx-1806 -d tinc
+deploy:
+  provider: releases
+  api_key:
+    secure: 1ebY5He10ivm+PN3PODtflrOEF+lH1eb8zlTrjVUTO5TKP7HQJK2fPcB0wIKcJRSqHDb+hzvrKj9oNbfSYtov7wWM/ULudJyNWRZE9T6LplEsHpETFM5m8st+4PSkDynJFLtB2+ihWQeH9YR/GUISRetxBbJuOSqwfVxRU43HkQDE0A4JvyTqMVhBZFfHKI+048upVxfb4+IgirVIXFrrMbHWlYeIIH5iQTnzkdo4chFTlyVvT0WSNmYF9taODcnPRSy9OSHvHsvudmD+xVl6Y0h6VvInmrvnwOOU3fj9uGF1+CXmxbTKlzPEbz1KtBIXZRmfJUGoTdcyyLyq8XPSFH0ZuNBJOKMExYBb0slL58OPPB8bHlrvc8osRWzvKibpTf+Emj5xR2yWS/Efn/ntBWDqWIxWa+6dyZHN5aBl2H8BTiCUV5WqIepIEufpNQKJWWa/FT2eEmwAnjNoEGqFbSCqxbgUaAUnSO4GTXRMq8nHZkty+zcpaVX/4PJiQdg1woUfbIjb5IjhBtVLi89Y+cYIXcpFPPBcSsUqZXcRqk3VGdyHDI+U04UdagC6p5lodpu8pvky+Ehnw5LiYVxI0D3vmprLSlHPYC4NmcQUVw7eizyqIOBb8QJUAVdvnuuV/Fm8G2MpjoxnzU6FkbWi5W6qIOw/8I9V0XhDXZpHMA=
+  file: sdk/1806/ar71xx/bin/packages/mips_24kc/base/*.ipk
+  file_glob: true
+  skip_cleanup: true
+  on:
+    tags: true
