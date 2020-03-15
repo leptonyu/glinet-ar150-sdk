@@ -21,7 +21,7 @@ script:
 - ./builder.sh -t ar71xx-1806 -d sdk/1806/ar71xx/feeds/base/package/libs/readline
 - ./builder.sh -t ar71xx-1806 -d sdk/1806/ar71xx/feeds/base/package/libs/ncurses
 - ./builder.sh -t ar71xx-1806 -d sdk/1806/ar71xx/feeds/base/package/libs/lzo
-- ./builder.sh -t ar71xx-1806 -d sdk/1806/ar71xx/feeds/base/package/libs/openssl
+- ./builder.sh -t ar71xx-1806 -d openssl 
 - ./builder.sh -t ar71xx-1806 -d tinc
 deploy:
   provider: releases

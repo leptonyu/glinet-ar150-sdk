@@ -42,6 +42,7 @@ CONFIGURE_ARGS += \
 	--with-lzo-include="$(STAGING_DIR)/usr/include/lzo" \
 	--with-curses \
 	--with-readline \
+	--disable-legacy-protocol \
 	--enable-jumbograms
 
 define Package/tinc/install
